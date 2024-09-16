@@ -20,9 +20,6 @@ def main():
         screen.draw_game(state)
 
 
-
-
-
 def handle_user_events():
     for event in pygame.event.get():
 
