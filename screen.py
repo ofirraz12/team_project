@@ -1,6 +1,7 @@
 import pygame
+import consts
 
-
-def crete_screen(width,height):
+def crete_screen(width,height,window_color):
     pygame.init()
-    pygame.display.set_mode((width, height))
+    surface = pygame.display.set_mode((width, height))
+    surface.fill(window_color)
