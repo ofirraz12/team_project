@@ -35,8 +35,22 @@ def handle_user_events():
         if state["is movement"] == True:
             pass
 
-        if event.key == pygame.K_SPACE:
-            pass
+        if event.type == pygame.KEYDOWN:
+
+            if event.key == pygame.K_SPACE:
+                print("space was pressed")
+
+            elif event.key == pygame.K_LEFT:
+                print("left was pressed")
+
+            elif event.key == pygame.K_RIGHT:
+                print("right was pressed")
+
+            elif event.key == pygame.K_UP:
+                print("up was pressed")
+
+            elif event.key == pygame.K_DOWN:
+                print("down was pressed")
 
 
 main()
