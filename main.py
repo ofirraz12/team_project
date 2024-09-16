@@ -14,10 +14,13 @@ def main():
     pygame.init()
     game_field.create_grid()
     game_grid = game_field.game_grid
+    grass_indexes = game_field.add_grass()
 
     while state["is_window_open"] == True:
         handle_user_events()
         screen.draw_game(state)
+        screen.draw_grass(grass_indexes)
+        pygame.display.flip()
 
 
 def handle_user_events():
