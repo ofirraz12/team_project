@@ -1,10 +1,15 @@
 import pygame
+import consts
+import screen
+import game_field
 
 state = {
     "state": consts.RUNNING_STATE,
     "is movement": False,
     "is_window_open": True,
 }
+
+game_field.create_grid()
 
 
 def handle_user_events():
