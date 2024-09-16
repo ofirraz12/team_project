@@ -2,6 +2,7 @@ import pygame
 import consts
 import screen
 import game_field
+import soldier
 
 state = {
     "state": consts.RUNNING_STATE,
@@ -14,10 +15,11 @@ def main():
     pygame.init()
     game_field.create_grid()
     game_grid = game_field.game_grid
+    screen.draw_game(state)
+    soldier.draw_soldier()
 
-    while state["is_window_open"] == True:
+    while state["is_window_open"]:
         handle_user_events()
-        screen.draw_game(state)
 
 
 def handle_user_events():
