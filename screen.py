@@ -1,8 +1,7 @@
-import random
 
 import pygame
 import consts
-import random as r
+
 
 screen = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 
