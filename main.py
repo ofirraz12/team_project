@@ -9,7 +9,11 @@ state = {
     "is_window_open": True,
 }
 
-game_field.create_grid()
+
+def main():
+    game_field.create_grid()
+    game_grid = game_field.game_grid
+    print(game_grid[0][1])
 
 
 def handle_user_events():
@@ -23,3 +27,6 @@ def handle_user_events():
 
         if event.key == pygame.K_SPACE:
             pass
+
+
+main()
