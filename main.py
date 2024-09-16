@@ -11,9 +11,16 @@ state = {
 
 
 def main():
+    pygame.init()
     game_field.create_grid()
     game_grid = game_field.game_grid
-    print(game_grid[0][1])
+
+    while state["is_window_open"] == True:
+        handle_user_events()
+        screen.draw_game(state)
+
+
+
 
 
 def handle_user_events():
@@ -23,6 +30,9 @@ def handle_user_events():
             state["is_window_open"] = False
 
         elif state["state"] != consts.RUNNING_STATE:
+            pass
+
+        if state["is movement"] == True:
             pass
 
         if event.key == pygame.K_SPACE:
