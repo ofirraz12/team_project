@@ -20,9 +20,6 @@ def main():
         screen.draw_game(state)
 
 
-
-
-
 def handle_user_events():
     for event in pygame.event.get():
 
@@ -35,7 +32,7 @@ def handle_user_events():
         if state["is movement"] == True:
             pass
 
-        if event.key == pygame.K_SPACE:
+        if event.type == pygame.K_SPACE:
             pass
 
 
