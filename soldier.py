@@ -1,14 +1,5 @@
-import pygame
 from consts import *
-import game_field
-import screen
 
-
-def draw_soldier(index):
-    soldier_image = pygame.image.load(SOLDIER_IMG)
-    soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE,SOLDIER_HEIGHT * BOX_SIZE))
-    screen.screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
-    pygame.display.flip()
 
 def move_soldier(direction, soldier_index):
     if direction == 'left':

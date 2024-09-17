@@ -6,7 +6,7 @@ import soldier
 
 state = {
     "state": consts.RUNNING_STATE,
-    "is movement": False,
+    "view_mines": False,
     "is_window_open": True,
 }
 
@@ -16,13 +16,13 @@ def main():
     game_field.create_grid()
     game_grid = game_field.game_grid
     grass_indexes = game_field.add_grass()
-    soldier.draw_soldier(soldier_index)
 
     while state["is_window_open"] == True:
         handle_user_events()
         screen.draw_game(state)
         screen.draw_grass(grass_indexes)
-        soldier.draw_soldier(soldier_index)
+        screen.draw_soldier(soldier_index)
+        screen.draw_flag()
         pygame.display.flip()
 
 
@@ -35,7 +35,7 @@ def handle_user_events():
         elif state["state"] != consts.RUNNING_STATE:
             pass
 
-        if state["is movement"] == True:
+        if state["view_mines"] == True:
             pass
 
         if event.type == pygame.KEYDOWN:
