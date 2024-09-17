@@ -1,6 +1,7 @@
 import pygame
 from consts import *
 import game_field
+import time
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 grass_indexes = game_field.add_grass()
@@ -10,7 +11,7 @@ mines_indexes = game_field.add_mines()
 def draw_game(state):
     screen.fill(BACKGROUND_COLOR)
     draw_grass(grass_indexes)
-    draw_soldier(soldier_index)
+    draw_soldier(soldier_index, "normal")
     draw_flag()
 
     if state["view_mines"]:
@@ -24,6 +25,11 @@ def draw_game(state):
                              , width=2)
 
         draw_mines(mines_indexes)
+        draw_soldier(soldier_index, "night")
+        pygame.display.flip()
+        time.sleep(1)
+        state["view_mines"] = False
+
 
 
 def draw_grass(indexes):
@@ -34,10 +40,16 @@ def draw_grass(indexes):
         screen.blit(grass.convert_alpha(), (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
 
 
-def draw_soldier(index):
-    soldier_image = pygame.image.load(SOLDIER_IMG)
-    soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
-    screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
+def draw_soldier(index, type_s):
+    if type_s == "normal":
+        soldier_image = pygame.image.load(SOLDIER_IMG)
+        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+        screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
+
+    elif type_s == "night":
+        soldier_image = pygame.image.load(SOLDIER_NIGHT_IMG)
+        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+        screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
 
 
 def draw_flag():

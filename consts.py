@@ -8,6 +8,7 @@ BOX_SIZE = 25
 
 GRASS_IMG = r"photos\grass.png"
 SOLDIER_IMG = r"photos\soldier.png"
+SOLDIER_NIGHT_IMG = r"photos\soldier_nigth.png"
 FLAG_IMG = r"photos\flag.png"
 MINE_IMG = r"photos\mine.png"
 

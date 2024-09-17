@@ -38,6 +38,7 @@ def handle_user_events():
 
             if event.key == pygame.K_SPACE:
                 print("space was pressed")
+                state["view_mines"] = True
 
             elif event.key == pygame.K_LEFT:
                 soldier.move_soldier("left", soldier_index)
