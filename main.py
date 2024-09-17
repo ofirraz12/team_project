@@ -32,6 +32,7 @@ def main():
         game_field.steeped_on_mine(soldier.soldier_hit_box(soldier_index), screen.mines_indexes, state)
 
 
+
 def handle_user_events():
     for event in pygame.event.get():
 
