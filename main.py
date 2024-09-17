@@ -6,7 +6,7 @@ import soldier
 
 state = {
     "state": RUNNING_STATE,
-    "view_mines": False,
+    "view_mines": True,
     "is_window_open": True,
 }
 

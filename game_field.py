@@ -14,9 +14,9 @@ def add_grass():
     grass_list = []
     temp_list = []
 
-    while len(grass_list) < 20:
-        col = random.randint(0, NUM_OF_COL - 1)
-        row = random.randint(0, NUM_OF_ROW - 1)
+    while len(grass_list) < NUM_OF_GRASS:
+        col = random.randint(1, NUM_OF_COL - 1)
+        row = random.randint(1, NUM_OF_ROW - 1)
         temp_list.append([col, row])
         if temp_list[-1] not in grass_list:
             grass_list.append([col, row])
@@ -25,11 +25,14 @@ def add_grass():
 
 
 def add_mines():
-    mine = "mine"
-    for i in range(AMOUNT_OF_GRASS):
-        col = random.randint(0, NUM_OF_COL - 1)
-        row = random.randint(0, NUM_OF_ROW - 1)
-        game_grid[row][col].append(mine)
+    mines_list = []
+    temp_list = []
 
-    return game_grid
+    while len(mines_list) < NUM_OF_MINES:
+        col = random.randint(2, NUM_OF_COL - MINE_WIDTH)
+        row = random.randint(2, NUM_OF_ROW - MINE_HEIGHT)
+        temp_list.append([col, row])
+        if temp_list[-1] not in mines_list:
+            mines_list.append([col, row])
 
+    return mines_list
