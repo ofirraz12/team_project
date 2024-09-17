@@ -24,6 +24,8 @@ def main():
         handle_user_events()
         screen.draw_game(state)
         pygame.display.flip()
+        game_field.got_to_flag(FLAG_LOCATION, soldier_index, state)
+        game_field.steeped_on_mine(soldier.soldier_hit_box(soldier_index), screen.mines_indexes, state)
 
 
 def handle_user_events():
@@ -54,8 +56,6 @@ def handle_user_events():
 
                 elif event.key == pygame.K_DOWN:
                     soldier.move_soldier("down", soldier_index)
-            game_field.got_to_flag(FLAG_LOCATION, soldier_index, state)
-            game_field.steeped_on_mine(soldier.soldier_hit_box(soldier_index), screen.mines_indexes, state)
 
 
 main()

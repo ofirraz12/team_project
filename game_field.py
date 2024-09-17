@@ -31,7 +31,7 @@ def add_mines():
 
     while len(mines_list) < NUM_OF_MINES:
         col = random.randint(2, NUM_OF_COL - MINE_WIDTH)
-        row = random.randint(2, NUM_OF_ROW - MINE_HEIGHT)
+        row = random.randint(3, NUM_OF_ROW - MINE_HEIGHT)
         temp_list.append([col, row])
         if temp_list[-1] not in mines_list:
             mines_list.append([col, row])
@@ -50,13 +50,13 @@ def flag_hit_box(flag_location):
 
 
 def got_to_flag(flag_location, soldier_location, state):
-    for index in soldier.soldier_hit_box(soldier_location):
+    for index in soldier.soldier_hit_box(soldier_location)[1]:
         if index in flag_hit_box(flag_location):
             state["state"] = WIN_STATE
 
 
 def steeped_on_mine(soldier_hit_box, mines_indexes, state):
-    for box in soldier_hit_box:
+    for box in soldier_hit_box[0]:
         for mine in mines_indexes:
             if box[1] == mine[1]:
                 if mine[0] - box[0] > -1 * MINE_WIDTH and mine[0] - box[0] <= 0:

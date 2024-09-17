@@ -23,10 +23,13 @@ def move_soldier(direction, soldier_index):
 
 
 def soldier_hit_box(soldier_index):
-    hit_box = []
-    for x in range(0, SOLDIER_WIDTH):
-        for y in range(0, SOLDIER_HEIGHT):
-            hit_box.append([soldier_index[0] + x, soldier_index[1] + y])
-
-    return hit_box
+    upper_hit_box = []
+    lower_hit_box = []
+    for x in range(SOLDIER_WIDTH):
+        for y in range(SOLDIER_HEIGHT):
+            if y == 3:
+                lower_hit_box.append([soldier_index[0] + x, soldier_index[1] + y])
+            else:
+                upper_hit_box.append([soldier_index[0] + x, soldier_index[1] + y])
+    return [lower_hit_box, upper_hit_box]
 
