@@ -22,11 +22,11 @@ def move_soldier(direction, soldier_index):
     return soldier_index
 
 
-def soldier_hitbox(soldier_index):
-    player_hitbox = []
+def soldier_hit_box(soldier_index):
+    hit_box = []
     for x in range(0, SOLDIER_WIDTH):
         for y in range(0, SOLDIER_HEIGHT):
-            player_hitbox.append([soldier_index[0] + x, soldier_index[1] + y])
+            hit_box.append([soldier_index[0] + x, soldier_index[1] + y])
 
-    return player_hitbox
+    return hit_box
 

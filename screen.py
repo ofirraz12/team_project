@@ -9,27 +9,35 @@ mines_indexes = game_field.add_mines()
 
 
 def draw_game(state):
-    screen.fill(BACKGROUND_COLOR)
-    draw_grass(grass_indexes)
-    draw_soldier(soldier_index, "normal")
-    draw_flag()
+    if state["state"] == RUNNING_STATE:
+        screen.fill(BACKGROUND_COLOR)
+        draw_grass(grass_indexes)
+        draw_soldier(soldier_index, "normal")
+        draw_flag()
 
-    if state["view_mines"]:
-        screen.fill(VIEW_MINES_COLOR)
-        for i in range(1, NUM_OF_COL):
-            pygame.draw.line(screen, BACKGROUND_COLOR, (i * BOX_SIZE, 0), (i * BOX_SIZE, NUM_OF_ROW * BOX_SIZE)
-                             , width=2)
+        if state["view_mines"]:
+            screen.fill(VIEW_MINES_COLOR)
+            for i in range(1, NUM_OF_COL):
+                pygame.draw.line(screen, BACKGROUND_COLOR, (i * BOX_SIZE, 0), (i * BOX_SIZE, NUM_OF_ROW * BOX_SIZE)
+                                 , width=2)
 
-        for j in range(1, NUM_OF_ROW):
-            pygame.draw.line(screen, BACKGROUND_COLOR, (0, j * BOX_SIZE), (NUM_OF_COL * BOX_SIZE, j * BOX_SIZE)
-                             , width=2)
+            for j in range(1, NUM_OF_ROW):
+                pygame.draw.line(screen, BACKGROUND_COLOR, (0, j * BOX_SIZE), (NUM_OF_COL * BOX_SIZE, j * BOX_SIZE)
+                                 , width=2)
 
-        draw_mines(mines_indexes)
-        draw_soldier(soldier_index, "night")
-        pygame.display.flip()
-        time.sleep(1)
-        state["view_mines"] = False
+            draw_mines(mines_indexes)
+            draw_soldier(soldier_index, "night")
+            pygame.display.flip()
+            time.sleep(1)
+            state["movement"] = True
+            pygame.event.clear()
+            state["view_mines"] = False
 
+    elif state["state"] == WIN_STATE:
+        draw_win_message()
+
+    elif state["state"] == LOSE_STATE:
+        draw_lose_message()
 
 
 def draw_grass(indexes):
@@ -64,5 +72,21 @@ def draw_mines(indexes):
 
     for index in indexes:
         screen.blit(mine.convert_alpha(), (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
+
+
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    screen.blit(text_img, location)
+
+
+def draw_lose_message():
+    draw_message(LOSE_MESSAGE, LOSE_FONT_SIZE,
+                 LOSE_COLOR, LOSE_LOCATION)
+
+
+def draw_win_message():
+    draw_message(WIN_MESSAGE, WIN_FONT_SIZE,
+                 WIN_COLOR, WIN_LOCATION)
 
 

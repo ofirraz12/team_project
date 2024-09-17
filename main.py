@@ -1,4 +1,6 @@
 import pygame
+
+import consts
 from consts import *
 import screen
 import game_field
@@ -8,6 +10,7 @@ state = {
     "state": RUNNING_STATE,
     "view_mines": False,
     "is_window_open": True,
+    "movement": True,
 }
 
 
@@ -18,7 +21,6 @@ def main():
 
 
     while state["is_window_open"] == True:
-        game_field.coalition(FLAG_LOCATION, soldier_index)
         handle_user_events()
         screen.draw_game(state)
         pygame.display.flip()
@@ -31,32 +33,29 @@ def handle_user_events():
             state["is_window_open"] = False
 
         elif state["state"] != RUNNING_STATE:
-            pass
-
-        if state["view_mines"] == True:
-            pass
+            state["movement"] = False
 
         if event.type == pygame.KEYDOWN:
 
-            if event.key == pygame.K_SPACE:
-                print("space was pressed")
-                state["view_mines"] = True
+            if state["movement"]:
+                if event.key == pygame.K_SPACE:
+                    state["movement"] = False
+                    state["view_mines"] = True
+                    continue
 
-            elif event.key == pygame.K_LEFT:
-                soldier.move_soldier("left", soldier_index)
-                print("left was pressed")
+                if event.key == pygame.K_LEFT:
+                    soldier.move_soldier("left", soldier_index)
 
-            elif event.key == pygame.K_RIGHT:
-                soldier.move_soldier("right", soldier_index)
-                print("right was pressed")
+                elif event.key == pygame.K_RIGHT:
+                    soldier.move_soldier("right", soldier_index)
 
-            elif event.key == pygame.K_UP:
-                soldier.move_soldier("up", soldier_index)
-                print("up was pressed")
+                elif event.key == pygame.K_UP:
+                    soldier.move_soldier("up", soldier_index)
 
-            elif event.key == pygame.K_DOWN:
-                soldier.move_soldier("down", soldier_index)
-                print("down was pressed")
+                elif event.key == pygame.K_DOWN:
+                    soldier.move_soldier("down", soldier_index)
+            game_field.got_to_flag(FLAG_LOCATION, soldier_index, state)
+            game_field.steeped_on_mine(soldier.soldier_hit_box(soldier_index), screen.mines_indexes, state)
 
 
 main()

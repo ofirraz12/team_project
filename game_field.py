@@ -39,7 +39,7 @@ def add_mines():
     return mines_list
 
 
-def flag_hitbox(flag_location):
+def flag_hit_box(flag_location):
     flag_box = []
     for x in range(0, FLAG_HEIGHT):
         for y in range(0, FLAG_WIDTH):
@@ -49,7 +49,15 @@ def flag_hitbox(flag_location):
     return flag_box
 
 
-def coalition(flag_location, soldier_index):
-    for index in soldier.soldier_hitbox(soldier_index):
-        if index in flag_hitbox(flag_location):
-            print("yello")
+def got_to_flag(flag_location, soldier_location, state):
+    for index in soldier.soldier_hit_box(soldier_location):
+        if index in flag_hit_box(flag_location):
+            state["state"] = WIN_STATE
+
+
+def steeped_on_mine(soldier_hit_box, mines_indexes, state):
+    for box in soldier_hit_box:
+        for mine in mines_indexes:
+            if box[1] == mine[1]:
+                if mine[0] - box[0] > -1 * MINE_WIDTH and mine[0] - box[0] <= 0:
+                    state["state"] = LOSE_STATE
