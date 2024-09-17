@@ -32,3 +32,4 @@ def add_mines():
         game_grid[row][col].append(mine)
 
     return game_grid
+
