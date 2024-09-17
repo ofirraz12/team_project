@@ -1,7 +1,10 @@
 import pygame
+
+import consts
 from consts import *
 import game_field
 import time
+import soldier
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 grass_indexes = game_field.add_grass()
@@ -37,6 +40,8 @@ def draw_game(state):
         draw_win_message()
 
     elif state["state"] == LOSE_STATE:
+        draw_explotion(soldier_index)
+        draw_soldier(soldier_index, "injured")
         draw_lose_message()
 
 
@@ -51,12 +56,17 @@ def draw_grass(indexes):
 def draw_soldier(index, type_s):
     if type_s == "normal":
         soldier_image = pygame.image.load(SOLDIER_IMG)
-        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_HEIGHT * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
         screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
 
     elif type_s == "night":
         soldier_image = pygame.image.load(SOLDIER_NIGHT_IMG)
-        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_WIDTH * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_HEIGHT * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+        screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
+
+    elif type_s == "injured":
+        soldier_image = pygame.image.load(SOLDIER_INJURED_IMG)
+        soldier_image = pygame.transform.scale(soldier_image, (SOLDIER_HEIGHT * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
         screen.blit(soldier_image, (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
 
 
@@ -74,6 +84,13 @@ def draw_mines(indexes):
         screen.blit(mine.convert_alpha(), (index[0] * BOX_SIZE, index[1] * BOX_SIZE))
 
 
+def draw_explotion(soldier_index):
+    explotion = pygame.image.load(EXPLOTION_IMG)
+    explotion = pygame.transform.scale(explotion, (SOLDIER_HEIGHT * BOX_SIZE, SOLDIER_HEIGHT * BOX_SIZE))
+    lower_index = soldier.soldier_hit_box(soldier_index)[0]
+    screen.blit(explotion, (lower_index[0][0] * BOX_SIZE, (lower_index[0][1] - 1) * BOX_SIZE))
+
+
 def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(FONT_NAME, font_size)
     text_img = font.render(message, True, color)
@@ -88,5 +105,3 @@ def draw_lose_message():
 def draw_win_message():
     draw_message(WIN_MESSAGE, WIN_FONT_SIZE,
                  WIN_COLOR, WIN_LOCATION)
-
-
