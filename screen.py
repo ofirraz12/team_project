@@ -1,12 +1,20 @@
 import pygame
 from consts import *
+import game_field
 
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+grass_indexes = game_field.add_grass()
 
 
-def draw_game(game_state):
+def draw_game(state):
     screen.fill(BACKGROUND_COLOR)
+    draw_grass(grass_indexes)
+    draw_soldier(soldier_index)
+    draw_flag()
+    if state["view_mines"]:
+        screen.fill(VIEW_MINES_COLOR)
+        pygame.draw.line(screen, BACKGROUND_COLOR, (0, 0), (200, 200))
 
 
 def draw_grass(grass_indexes):
