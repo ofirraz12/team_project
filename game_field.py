@@ -1,3 +1,4 @@
+import soldier
 from consts import *
 import random
 import pygame
@@ -36,3 +37,19 @@ def add_mines():
             mines_list.append([col, row])
 
     return mines_list
+
+
+def flag_hitbox(flag_location):
+    flag_box = []
+    for x in range(0, FLAG_HEIGHT):
+        for y in range(0, FLAG_WIDTH):
+            flag_box.append([flag_location[0] + x, flag_location[1] + y])
+    # print(flag_box)
+
+    return flag_box
+
+
+def coalition(flag_location, soldier_index):
+    for index in soldier.soldier_hitbox(soldier_index):
+        if index in flag_hitbox(flag_location):
+            print("yello")

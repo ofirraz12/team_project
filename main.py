@@ -16,7 +16,9 @@ def main():
     game_field.create_grid()
     game_grid = game_field.game_grid
 
+
     while state["is_window_open"] == True:
+        game_field.coalition(FLAG_LOCATION, soldier_index)
         handle_user_events()
         screen.draw_game(state)
         pygame.display.flip()

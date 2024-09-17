@@ -1,4 +1,5 @@
 from consts import *
+import game_field
 
 
 def move_soldier(direction, soldier_index):
@@ -20,4 +21,12 @@ def move_soldier(direction, soldier_index):
 
     return soldier_index
 
+
+def soldier_hitbox(soldier_index):
+    player_hitbox = []
+    for x in range(0, SOLDIER_WIDTH):
+        for y in range(0, SOLDIER_HEIGHT):
+            player_hitbox.append([soldier_index[0] + x, soldier_index[1] + y])
+
+    return player_hitbox
 
