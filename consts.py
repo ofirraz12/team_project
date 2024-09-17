@@ -9,6 +9,7 @@ BOX_SIZE = 25
 GRASS_IMG = r"photos\grass.png"
 SOLDIER_IMG = r"photos\soldier.png"
 FLAG_IMG = r"photos\flag.png"
+MINE_IMG = r"photos\mine.png"
 
 WINDOW_WIDTH = NUM_OF_COL * BOX_SIZE
 WINDOW_HEIGHT = NUM_OF_ROW * BOX_SIZE
